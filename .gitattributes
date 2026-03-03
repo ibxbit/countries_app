@@ -1,0 +1,12 @@
+# Mark platform-specific boilerplate as vendored so they don't skew language statistics
+android/* linguist-vendored
+ios/* linguist-vendored
+web/* linguist-vendored
+linux/* linguist-vendored
+macos/* linguist-vendored
+windows/* linguist-vendored
+
+# Also hide generated files
+*.freezed.dart linguist-vendored
+*.g.dart linguist-vendored
+pubspec.lock linguist-vendored
