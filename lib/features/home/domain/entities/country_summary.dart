@@ -18,5 +18,12 @@ class CountrySummary extends Equatable {
   });
 
   @override
-  List<Object?> get props => [commonName, flagPng, flagSvg, population, cca2, capital];
+  List<Object?> get props => [
+    commonName,
+    flagPng,
+    flagSvg,
+    population,
+    cca2,
+    capital,
+  ];
 }

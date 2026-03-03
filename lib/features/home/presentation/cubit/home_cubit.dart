@@ -9,10 +9,8 @@ class HomeCubit extends Cubit<HomeState> {
   final GetAllCountries getAllCountries;
   final SearchCountries searchCountries;
 
-  HomeCubit({
-    required this.getAllCountries,
-    required this.searchCountries,
-  }) : super(HomeInitial());
+  HomeCubit({required this.getAllCountries, required this.searchCountries})
+    : super(HomeInitial());
 
   Timer? _debounce;
 
@@ -21,10 +19,8 @@ class HomeCubit extends Cubit<HomeState> {
     final result = await getAllCountries(NoParams());
     result.fold(
       (failure) => emit(HomeError(failure.message)),
-      (countries) => emit(HomeLoaded(
-        countries: countries,
-        filteredCountries: countries,
-      )),
+      (countries) =>
+          emit(HomeLoaded(countries: countries, filteredCountries: countries)),
     );
   }
 
@@ -40,10 +36,12 @@ class HomeCubit extends Cubit<HomeState> {
     final currentState = state as HomeLoaded;
 
     if (query.isEmpty) {
-      emit(currentState.copyWith(
-        filteredCountries: currentState.countries,
-        searchQuery: '',
-      ));
+      emit(
+        currentState.copyWith(
+          filteredCountries: currentState.countries,
+          searchQuery: '',
+        ),
+      );
       return;
     }
 
@@ -52,10 +50,12 @@ class HomeCubit extends Cubit<HomeState> {
       return c.commonName.toLowerCase().contains(query.toLowerCase());
     }).toList();
 
-    emit(currentState.copyWith(
-      filteredCountries: localFiltered,
-      searchQuery: query,
-    ));
+    emit(
+      currentState.copyWith(
+        filteredCountries: localFiltered,
+        searchQuery: query,
+      ),
+    );
 
     // Optional: Call API if local search results are sparse or if you want fresh data
     // For this task, local filtering of the "All" list is usually enough for "real-time" search.

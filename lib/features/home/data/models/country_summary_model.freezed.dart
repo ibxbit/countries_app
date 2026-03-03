@@ -5,7 +5,8 @@ part of 'country_summary_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 CountrySummaryModel _$CountrySummaryModelFromJson(Map<String, dynamic> json) {
   return _CountrySummaryModel.fromJson(json);
@@ -33,15 +34,17 @@ mixin _$CountrySummaryModel {
 /// @nodoc
 abstract class $CountrySummaryModelCopyWith<$Res> {
   factory $CountrySummaryModelCopyWith(
-          CountrySummaryModel value, $Res Function(CountrySummaryModel) then) =
-      _$CountrySummaryModelCopyWithImpl<$Res, CountrySummaryModel>;
+    CountrySummaryModel value,
+    $Res Function(CountrySummaryModel) then,
+  ) = _$CountrySummaryModelCopyWithImpl<$Res, CountrySummaryModel>;
   @useResult
-  $Res call(
-      {@HiveField(0) Map<String, dynamic>? name,
-      @HiveField(1) Map<String, dynamic>? flags,
-      @HiveField(2) int? population,
-      @HiveField(3) String? cca2,
-      @HiveField(4) List<dynamic>? capital});
+  $Res call({
+    @HiveField(0) Map<String, dynamic>? name,
+    @HiveField(1) Map<String, dynamic>? flags,
+    @HiveField(2) int? population,
+    @HiveField(3) String? cca2,
+    @HiveField(4) List<dynamic>? capital,
+  });
 }
 
 /// @nodoc
@@ -63,54 +66,60 @@ class _$CountrySummaryModelCopyWithImpl<$Res, $Val extends CountrySummaryModel>
     Object? cca2 = freezed,
     Object? capital = freezed,
   }) {
-    return _then(_value.copyWith(
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      flags: freezed == flags
-          ? _value.flags
-          : flags // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      population: freezed == population
-          ? _value.population
-          : population // ignore: cast_nullable_to_non_nullable
-              as int?,
-      cca2: freezed == cca2
-          ? _value.cca2
-          : cca2 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      capital: freezed == capital
-          ? _value.capital
-          : capital // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            name: freezed == name
+                ? _value.name
+                : name // ignore: cast_nullable_to_non_nullable
+                      as Map<String, dynamic>?,
+            flags: freezed == flags
+                ? _value.flags
+                : flags // ignore: cast_nullable_to_non_nullable
+                      as Map<String, dynamic>?,
+            population: freezed == population
+                ? _value.population
+                : population // ignore: cast_nullable_to_non_nullable
+                      as int?,
+            cca2: freezed == cca2
+                ? _value.cca2
+                : cca2 // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            capital: freezed == capital
+                ? _value.capital
+                : capital // ignore: cast_nullable_to_non_nullable
+                      as List<dynamic>?,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$CountrySummaryModelImplCopyWith<$Res>
     implements $CountrySummaryModelCopyWith<$Res> {
-  factory _$$CountrySummaryModelImplCopyWith(_$CountrySummaryModelImpl value,
-          $Res Function(_$CountrySummaryModelImpl) then) =
-      __$$CountrySummaryModelImplCopyWithImpl<$Res>;
+  factory _$$CountrySummaryModelImplCopyWith(
+    _$CountrySummaryModelImpl value,
+    $Res Function(_$CountrySummaryModelImpl) then,
+  ) = __$$CountrySummaryModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@HiveField(0) Map<String, dynamic>? name,
-      @HiveField(1) Map<String, dynamic>? flags,
-      @HiveField(2) int? population,
-      @HiveField(3) String? cca2,
-      @HiveField(4) List<dynamic>? capital});
+  $Res call({
+    @HiveField(0) Map<String, dynamic>? name,
+    @HiveField(1) Map<String, dynamic>? flags,
+    @HiveField(2) int? population,
+    @HiveField(3) String? cca2,
+    @HiveField(4) List<dynamic>? capital,
+  });
 }
 
 /// @nodoc
 class __$$CountrySummaryModelImplCopyWithImpl<$Res>
     extends _$CountrySummaryModelCopyWithImpl<$Res, _$CountrySummaryModelImpl>
     implements _$$CountrySummaryModelImplCopyWith<$Res> {
-  __$$CountrySummaryModelImplCopyWithImpl(_$CountrySummaryModelImpl _value,
-      $Res Function(_$CountrySummaryModelImpl) _then)
-      : super(_value, _then);
+  __$$CountrySummaryModelImplCopyWithImpl(
+    _$CountrySummaryModelImpl _value,
+    $Res Function(_$CountrySummaryModelImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -121,44 +130,46 @@ class __$$CountrySummaryModelImplCopyWithImpl<$Res>
     Object? cca2 = freezed,
     Object? capital = freezed,
   }) {
-    return _then(_$CountrySummaryModelImpl(
-      name: freezed == name
-          ? _value._name
-          : name // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      flags: freezed == flags
-          ? _value._flags
-          : flags // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      population: freezed == population
-          ? _value.population
-          : population // ignore: cast_nullable_to_non_nullable
-              as int?,
-      cca2: freezed == cca2
-          ? _value.cca2
-          : cca2 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      capital: freezed == capital
-          ? _value._capital
-          : capital // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-    ));
+    return _then(
+      _$CountrySummaryModelImpl(
+        name: freezed == name
+            ? _value._name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as Map<String, dynamic>?,
+        flags: freezed == flags
+            ? _value._flags
+            : flags // ignore: cast_nullable_to_non_nullable
+                  as Map<String, dynamic>?,
+        population: freezed == population
+            ? _value.population
+            : population // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        cca2: freezed == cca2
+            ? _value.cca2
+            : cca2 // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        capital: freezed == capital
+            ? _value._capital
+            : capital // ignore: cast_nullable_to_non_nullable
+                  as List<dynamic>?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$CountrySummaryModelImpl extends _CountrySummaryModel {
-  const _$CountrySummaryModelImpl(
-      {@HiveField(0) required final Map<String, dynamic>? name,
-      @HiveField(1) required final Map<String, dynamic>? flags,
-      @HiveField(2) required this.population,
-      @HiveField(3) required this.cca2,
-      @HiveField(4) required final List<dynamic>? capital})
-      : _name = name,
-        _flags = flags,
-        _capital = capital,
-        super._();
+  const _$CountrySummaryModelImpl({
+    @HiveField(0) required final Map<String, dynamic>? name,
+    @HiveField(1) required final Map<String, dynamic>? flags,
+    @HiveField(2) required this.population,
+    @HiveField(3) required this.cca2,
+    @HiveField(4) required final List<dynamic>? capital,
+  }) : _name = name,
+       _flags = flags,
+       _capital = capital,
+       super._();
 
   factory _$CountrySummaryModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$CountrySummaryModelImplFromJson(json);
@@ -223,36 +234,37 @@ class _$CountrySummaryModelImpl extends _CountrySummaryModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_name),
-      const DeepCollectionEquality().hash(_flags),
-      population,
-      cca2,
-      const DeepCollectionEquality().hash(_capital));
+    runtimeType,
+    const DeepCollectionEquality().hash(_name),
+    const DeepCollectionEquality().hash(_flags),
+    population,
+    cca2,
+    const DeepCollectionEquality().hash(_capital),
+  );
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CountrySummaryModelImplCopyWith<_$CountrySummaryModelImpl> get copyWith =>
       __$$CountrySummaryModelImplCopyWithImpl<_$CountrySummaryModelImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$CountrySummaryModelImplToJson(
-      this,
-    );
+    return _$$CountrySummaryModelImplToJson(this);
   }
 }
 
 abstract class _CountrySummaryModel extends CountrySummaryModel {
-  const factory _CountrySummaryModel(
-          {@HiveField(0) required final Map<String, dynamic>? name,
-          @HiveField(1) required final Map<String, dynamic>? flags,
-          @HiveField(2) required final int? population,
-          @HiveField(3) required final String? cca2,
-          @HiveField(4) required final List<dynamic>? capital}) =
-      _$CountrySummaryModelImpl;
+  const factory _CountrySummaryModel({
+    @HiveField(0) required final Map<String, dynamic>? name,
+    @HiveField(1) required final Map<String, dynamic>? flags,
+    @HiveField(2) required final int? population,
+    @HiveField(3) required final String? cca2,
+    @HiveField(4) required final List<dynamic>? capital,
+  }) = _$CountrySummaryModelImpl;
   const _CountrySummaryModel._() : super._();
 
   factory _CountrySummaryModel.fromJson(Map<String, dynamic> json) =

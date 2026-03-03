@@ -20,7 +20,9 @@ class HomeRepositoryImpl implements HomeRepository {
   }
 
   @override
-  Future<Either<Failure, List<CountrySummary>>> searchCountries(String name) async {
+  Future<Either<Failure, List<CountrySummary>>> searchCountries(
+    String name,
+  ) async {
     try {
       final remoteCountries = await remoteDataSource.searchCountries(name);
       return Right(remoteCountries.map((e) => e.toEntity()).toList());

@@ -26,7 +26,8 @@ class CountryDetailModel with _$CountryDetailModel {
   CountryDetail toEntity() {
     return CountryDetail(
       cca2: cca2 ?? '??',
-      commonName: (name != null ? (name!['common'] as String?) : null) ?? 'Unknown',
+      commonName:
+          (name != null ? (name!['common'] as String?) : null) ?? 'Unknown',
       flagPng: (flags != null ? (flags!['png'] as String?) : null) ?? '',
       flagSvg: (flags != null ? (flags!['svg'] as String?) : null) ?? '',
       population: population ?? 0,

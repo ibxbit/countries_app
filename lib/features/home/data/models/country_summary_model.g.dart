@@ -51,21 +51,21 @@ class CountrySummaryModelAdapter extends TypeAdapter<CountrySummaryModel> {
 // JsonSerializableGenerator
 
 _$CountrySummaryModelImpl _$$CountrySummaryModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$CountrySummaryModelImpl(
-      name: json['name'] as Map<String, dynamic>?,
-      flags: json['flags'] as Map<String, dynamic>?,
-      population: (json['population'] as num?)?.toInt(),
-      cca2: json['cca2'] as String?,
-      capital: json['capital'] as List<dynamic>?,
-    );
+  Map<String, dynamic> json,
+) => _$CountrySummaryModelImpl(
+  name: json['name'] as Map<String, dynamic>?,
+  flags: json['flags'] as Map<String, dynamic>?,
+  population: (json['population'] as num?)?.toInt(),
+  cca2: json['cca2'] as String?,
+  capital: json['capital'] as List<dynamic>?,
+);
 
 Map<String, dynamic> _$$CountrySummaryModelImplToJson(
-        _$CountrySummaryModelImpl instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-      'flags': instance.flags,
-      'population': instance.population,
-      'cca2': instance.cca2,
-      'capital': instance.capital,
-    };
+  _$CountrySummaryModelImpl instance,
+) => <String, dynamic>{
+  'name': instance.name,
+  'flags': instance.flags,
+  'population': instance.population,
+  'cca2': instance.cca2,
+  'capital': instance.capital,
+};

@@ -5,7 +5,8 @@ part of 'country_detail_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 CountryDetailModel _$CountryDetailModelFromJson(Map<String, dynamic> json) {
   return _CountryDetailModel.fromJson(json);
@@ -32,19 +33,21 @@ mixin _$CountryDetailModel {
 /// @nodoc
 abstract class $CountryDetailModelCopyWith<$Res> {
   factory $CountryDetailModelCopyWith(
-          CountryDetailModel value, $Res Function(CountryDetailModel) then) =
-      _$CountryDetailModelCopyWithImpl<$Res, CountryDetailModel>;
+    CountryDetailModel value,
+    $Res Function(CountryDetailModel) then,
+  ) = _$CountryDetailModelCopyWithImpl<$Res, CountryDetailModel>;
   @useResult
-  $Res call(
-      {String? cca2,
-      Map<String, dynamic>? name,
-      Map<String, dynamic>? flags,
-      int? population,
-      List<dynamic>? capital,
-      String? region,
-      String? subregion,
-      double? area,
-      List<String>? timezones});
+  $Res call({
+    String? cca2,
+    Map<String, dynamic>? name,
+    Map<String, dynamic>? flags,
+    int? population,
+    List<dynamic>? capital,
+    String? region,
+    String? subregion,
+    double? area,
+    List<String>? timezones,
+  });
 }
 
 /// @nodoc
@@ -70,74 +73,80 @@ class _$CountryDetailModelCopyWithImpl<$Res, $Val extends CountryDetailModel>
     Object? area = freezed,
     Object? timezones = freezed,
   }) {
-    return _then(_value.copyWith(
-      cca2: freezed == cca2
-          ? _value.cca2
-          : cca2 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      flags: freezed == flags
-          ? _value.flags
-          : flags // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      population: freezed == population
-          ? _value.population
-          : population // ignore: cast_nullable_to_non_nullable
-              as int?,
-      capital: freezed == capital
-          ? _value.capital
-          : capital // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-      region: freezed == region
-          ? _value.region
-          : region // ignore: cast_nullable_to_non_nullable
-              as String?,
-      subregion: freezed == subregion
-          ? _value.subregion
-          : subregion // ignore: cast_nullable_to_non_nullable
-              as String?,
-      area: freezed == area
-          ? _value.area
-          : area // ignore: cast_nullable_to_non_nullable
-              as double?,
-      timezones: freezed == timezones
-          ? _value.timezones
-          : timezones // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            cca2: freezed == cca2
+                ? _value.cca2
+                : cca2 // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            name: freezed == name
+                ? _value.name
+                : name // ignore: cast_nullable_to_non_nullable
+                      as Map<String, dynamic>?,
+            flags: freezed == flags
+                ? _value.flags
+                : flags // ignore: cast_nullable_to_non_nullable
+                      as Map<String, dynamic>?,
+            population: freezed == population
+                ? _value.population
+                : population // ignore: cast_nullable_to_non_nullable
+                      as int?,
+            capital: freezed == capital
+                ? _value.capital
+                : capital // ignore: cast_nullable_to_non_nullable
+                      as List<dynamic>?,
+            region: freezed == region
+                ? _value.region
+                : region // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            subregion: freezed == subregion
+                ? _value.subregion
+                : subregion // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            area: freezed == area
+                ? _value.area
+                : area // ignore: cast_nullable_to_non_nullable
+                      as double?,
+            timezones: freezed == timezones
+                ? _value.timezones
+                : timezones // ignore: cast_nullable_to_non_nullable
+                      as List<String>?,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$CountryDetailModelImplCopyWith<$Res>
     implements $CountryDetailModelCopyWith<$Res> {
-  factory _$$CountryDetailModelImplCopyWith(_$CountryDetailModelImpl value,
-          $Res Function(_$CountryDetailModelImpl) then) =
-      __$$CountryDetailModelImplCopyWithImpl<$Res>;
+  factory _$$CountryDetailModelImplCopyWith(
+    _$CountryDetailModelImpl value,
+    $Res Function(_$CountryDetailModelImpl) then,
+  ) = __$$CountryDetailModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String? cca2,
-      Map<String, dynamic>? name,
-      Map<String, dynamic>? flags,
-      int? population,
-      List<dynamic>? capital,
-      String? region,
-      String? subregion,
-      double? area,
-      List<String>? timezones});
+  $Res call({
+    String? cca2,
+    Map<String, dynamic>? name,
+    Map<String, dynamic>? flags,
+    int? population,
+    List<dynamic>? capital,
+    String? region,
+    String? subregion,
+    double? area,
+    List<String>? timezones,
+  });
 }
 
 /// @nodoc
 class __$$CountryDetailModelImplCopyWithImpl<$Res>
     extends _$CountryDetailModelCopyWithImpl<$Res, _$CountryDetailModelImpl>
     implements _$$CountryDetailModelImplCopyWith<$Res> {
-  __$$CountryDetailModelImplCopyWithImpl(_$CountryDetailModelImpl _value,
-      $Res Function(_$CountryDetailModelImpl) _then)
-      : super(_value, _then);
+  __$$CountryDetailModelImplCopyWithImpl(
+    _$CountryDetailModelImpl _value,
+    $Res Function(_$CountryDetailModelImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -152,65 +161,67 @@ class __$$CountryDetailModelImplCopyWithImpl<$Res>
     Object? area = freezed,
     Object? timezones = freezed,
   }) {
-    return _then(_$CountryDetailModelImpl(
-      cca2: freezed == cca2
-          ? _value.cca2
-          : cca2 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      name: freezed == name
-          ? _value._name
-          : name // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      flags: freezed == flags
-          ? _value._flags
-          : flags // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      population: freezed == population
-          ? _value.population
-          : population // ignore: cast_nullable_to_non_nullable
-              as int?,
-      capital: freezed == capital
-          ? _value._capital
-          : capital // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-      region: freezed == region
-          ? _value.region
-          : region // ignore: cast_nullable_to_non_nullable
-              as String?,
-      subregion: freezed == subregion
-          ? _value.subregion
-          : subregion // ignore: cast_nullable_to_non_nullable
-              as String?,
-      area: freezed == area
-          ? _value.area
-          : area // ignore: cast_nullable_to_non_nullable
-              as double?,
-      timezones: freezed == timezones
-          ? _value._timezones
-          : timezones // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-    ));
+    return _then(
+      _$CountryDetailModelImpl(
+        cca2: freezed == cca2
+            ? _value.cca2
+            : cca2 // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        name: freezed == name
+            ? _value._name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as Map<String, dynamic>?,
+        flags: freezed == flags
+            ? _value._flags
+            : flags // ignore: cast_nullable_to_non_nullable
+                  as Map<String, dynamic>?,
+        population: freezed == population
+            ? _value.population
+            : population // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        capital: freezed == capital
+            ? _value._capital
+            : capital // ignore: cast_nullable_to_non_nullable
+                  as List<dynamic>?,
+        region: freezed == region
+            ? _value.region
+            : region // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        subregion: freezed == subregion
+            ? _value.subregion
+            : subregion // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        area: freezed == area
+            ? _value.area
+            : area // ignore: cast_nullable_to_non_nullable
+                  as double?,
+        timezones: freezed == timezones
+            ? _value._timezones
+            : timezones // ignore: cast_nullable_to_non_nullable
+                  as List<String>?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$CountryDetailModelImpl extends _CountryDetailModel {
-  const _$CountryDetailModelImpl(
-      {required this.cca2,
-      required final Map<String, dynamic>? name,
-      required final Map<String, dynamic>? flags,
-      required this.population,
-      required final List<dynamic>? capital,
-      required this.region,
-      required this.subregion,
-      required this.area,
-      required final List<String>? timezones})
-      : _name = name,
-        _flags = flags,
-        _capital = capital,
-        _timezones = timezones,
-        super._();
+  const _$CountryDetailModelImpl({
+    required this.cca2,
+    required final Map<String, dynamic>? name,
+    required final Map<String, dynamic>? flags,
+    required this.population,
+    required final List<dynamic>? capital,
+    required this.region,
+    required this.subregion,
+    required this.area,
+    required final List<String>? timezones,
+  }) : _name = name,
+       _flags = flags,
+       _capital = capital,
+       _timezones = timezones,
+       super._();
 
   factory _$CountryDetailModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$CountryDetailModelImplFromJson(json);
@@ -285,50 +296,54 @@ class _$CountryDetailModelImpl extends _CountryDetailModel {
             (identical(other.subregion, subregion) ||
                 other.subregion == subregion) &&
             (identical(other.area, area) || other.area == area) &&
-            const DeepCollectionEquality()
-                .equals(other._timezones, _timezones));
+            const DeepCollectionEquality().equals(
+              other._timezones,
+              _timezones,
+            ));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      cca2,
-      const DeepCollectionEquality().hash(_name),
-      const DeepCollectionEquality().hash(_flags),
-      population,
-      const DeepCollectionEquality().hash(_capital),
-      region,
-      subregion,
-      area,
-      const DeepCollectionEquality().hash(_timezones));
+    runtimeType,
+    cca2,
+    const DeepCollectionEquality().hash(_name),
+    const DeepCollectionEquality().hash(_flags),
+    population,
+    const DeepCollectionEquality().hash(_capital),
+    region,
+    subregion,
+    area,
+    const DeepCollectionEquality().hash(_timezones),
+  );
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CountryDetailModelImplCopyWith<_$CountryDetailModelImpl> get copyWith =>
       __$$CountryDetailModelImplCopyWithImpl<_$CountryDetailModelImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$CountryDetailModelImplToJson(
-      this,
-    );
+    return _$$CountryDetailModelImplToJson(this);
   }
 }
 
 abstract class _CountryDetailModel extends CountryDetailModel {
-  const factory _CountryDetailModel(
-      {required final String? cca2,
-      required final Map<String, dynamic>? name,
-      required final Map<String, dynamic>? flags,
-      required final int? population,
-      required final List<dynamic>? capital,
-      required final String? region,
-      required final String? subregion,
-      required final double? area,
-      required final List<String>? timezones}) = _$CountryDetailModelImpl;
+  const factory _CountryDetailModel({
+    required final String? cca2,
+    required final Map<String, dynamic>? name,
+    required final Map<String, dynamic>? flags,
+    required final int? population,
+    required final List<dynamic>? capital,
+    required final String? region,
+    required final String? subregion,
+    required final double? area,
+    required final List<String>? timezones,
+  }) = _$CountryDetailModelImpl;
   const _CountryDetailModel._() : super._();
 
   factory _CountryDetailModel.fromJson(Map<String, dynamic> json) =

@@ -12,11 +12,7 @@ class DetailScreen extends StatelessWidget {
   final String cca2;
   final ScrollController? scrollController;
 
-  const DetailScreen({
-    super.key, 
-    required this.cca2,
-    this.scrollController,
-  });
+  const DetailScreen({super.key, required this.cca2, this.scrollController});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +39,11 @@ class DetailScreen extends StatelessWidget {
               elevation: 0,
               centerTitle: true,
               leading: IconButton(
-                icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black, size: 20),
+                icon: const Icon(
+                  Icons.arrow_back_ios_new,
+                  color: Colors.black,
+                  size: 20,
+                ),
                 onPressed: () => Navigator.pop(context),
               ),
               title: Text(
@@ -58,13 +58,17 @@ class DetailScreen extends StatelessWidget {
                 BlocBuilder<FavoritesCubit, FavoritesState>(
                   builder: (context, favState) {
                     if (state is! DetailLoaded) return const SizedBox.shrink();
-                    final isFav = context.read<FavoritesCubit>().isCountryFavorite(state.country.cca2);
+                    final isFav = context
+                        .read<FavoritesCubit>()
+                        .isCountryFavorite(state.country.cca2);
                     return IconButton(
                       icon: Icon(
                         isFav ? Icons.favorite : Icons.favorite_border,
                         color: isFav ? Colors.red : Colors.black,
                       ),
-                      onPressed: () => context.read<FavoritesCubit>().onToggleFavorite(state.country.toSummary()),
+                      onPressed: () => context
+                          .read<FavoritesCubit>()
+                          .onToggleFavorite(state.country.toSummary()),
                     );
                   },
                 ),
@@ -84,9 +88,7 @@ class DetailScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
 
-                Expanded(
-                  child: _buildBody(context, state),
-                ),
+                Expanded(child: _buildBody(context, state)),
               ],
             ),
           );
@@ -159,7 +161,8 @@ class DetailScreen extends StatelessWidget {
                 width: double.infinity,
                 height: double.infinity,
                 fit: BoxFit.cover,
-                placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                placeholder: (context, url) =>
+                    const Center(child: CircularProgressIndicator()),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
@@ -168,8 +171,6 @@ class DetailScreen extends StatelessWidget {
       ),
     );
   }
-
-
 
   Widget _buildInfoGrid(BuildContext context, dynamic country) {
     final formatter = NumberFormat.decimalPattern();
@@ -212,14 +213,16 @@ class DetailScreen extends StatelessWidget {
     );
   }
 
-
   Widget _buildTimezoneSection(BuildContext context, dynamic country) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Timezone',
-          style: GoogleFonts.jetBrainsMono(fontSize: 18, fontWeight: FontWeight.bold),
+          style: GoogleFonts.jetBrainsMono(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         const SizedBox(height: 16),
         Wrap(
@@ -274,7 +277,8 @@ class DetailScreen extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             ElevatedButton.icon(
-              onPressed: () => context.read<DetailCubit>().loadCountryDetail(cca2),
+              onPressed: () =>
+                  context.read<DetailCubit>().loadCountryDetail(cca2),
               icon: const Icon(Icons.refresh),
               label: const Text('Retry'),
             ),

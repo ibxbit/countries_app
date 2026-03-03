@@ -1,12 +1,14 @@
-# Mark platform-specific boilerplate as vendored so they don't skew language statistics
-android/* linguist-vendored
-ios/* linguist-vendored
-web/* linguist-vendored
-linux/* linguist-vendored
-macos/* linguist-vendored
-windows/* linguist-vendored
+# Mark platform-specific boilerplate and generated code as vendored (ignored by language stats)
+android/** linguist-vendored
+ios/** linguist-vendored
+web/** linguist-vendored
+linux/** linguist-vendored
+macos/** linguist-vendored
+windows/** linguist-vendored
 
-# Also hide generated files
+# Hide generated files and lockfiles
 *.freezed.dart linguist-vendored
 *.g.dart linguist-vendored
 pubspec.lock linguist-vendored
+README.md linguist-documentation
+analysis_options.yaml linguist-vendored

@@ -23,16 +23,13 @@ class ToggleFavorite implements UseCase<void, CountrySummary> {
   @override
   Future<Either<Failure, void>> call(CountrySummary params) async {
     final isFavResult = await repository.isFavorite(params.cca2);
-    return isFavResult.fold(
-      (failure) => Left(failure),
-      (isFav) async {
-        if (isFav) {
-          return await repository.removeFromFavorites(params.cca2);
-        } else {
-          return await repository.addToFavorites(params);
-        }
-      },
-    );
+    return isFavResult.fold((failure) => Left(failure), (isFav) async {
+      if (isFav) {
+        return await repository.removeFromFavorites(params.cca2);
+      } else {
+        return await repository.addToFavorites(params);
+      }
+    });
   }
 }
 

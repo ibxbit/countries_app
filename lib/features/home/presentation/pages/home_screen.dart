@@ -52,15 +52,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     // Determine the "top part" color. Usually the AppBar surface tint or background.
-    final appBarColor = theme.appBarTheme.backgroundColor ?? theme.colorScheme.surface;
+    final appBarColor =
+        theme.appBarTheme.backgroundColor ?? theme.colorScheme.surface;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
           'World Countries',
-          style: GoogleFonts.jetBrainsMono(
-            fontWeight: FontWeight.bold,
-          ),
+          style: GoogleFonts.jetBrainsMono(fontWeight: FontWeight.bold),
         ),
         elevation: _isScrolled ? 2 : 0,
         backgroundColor: appBarColor,
@@ -70,29 +69,40 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: TextField(
-              onChanged: (query) => context.read<HomeCubit>().onSearchChanged(query),
+              onChanged: (query) =>
+                  context.read<HomeCubit>().onSearchChanged(query),
               decoration: InputDecoration(
                 hintText: 'Search for a country',
                 hintStyle: GoogleFonts.jetBrainsMono(fontSize: 14),
                 prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: _isScrolled 
+                  borderSide: _isScrolled
                       ? BorderSide(color: theme.colorScheme.primary, width: 1.5)
                       : BorderSide.none,
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: _isScrolled 
-                      ? BorderSide(color: theme.colorScheme.primary.withValues(alpha: 0.5), width: 1.5)
+                  borderSide: _isScrolled
+                      ? BorderSide(
+                          color: theme.colorScheme.primary.withValues(
+                            alpha: 0.5,
+                          ),
+                          width: 1.5,
+                        )
                       : BorderSide.none,
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: theme.colorScheme.primary, width: 2),
+                  borderSide: BorderSide(
+                    color: theme.colorScheme.primary,
+                    width: 2,
+                  ),
                 ),
                 filled: true,
-                fillColor: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+                fillColor: theme.colorScheme.surfaceContainerHighest.withValues(
+                  alpha: 0.5,
+                ),
                 contentPadding: const EdgeInsets.symmetric(vertical: 0),
               ),
               style: GoogleFonts.jetBrainsMono(fontSize: 15),
@@ -137,12 +147,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: countries.length,
                     itemBuilder: (context, index) {
                       final country = countries[index];
-                      final isFav = context.read<FavoritesCubit>().isCountryFavorite(country.cca2);
+                      final isFav = context
+                          .read<FavoritesCubit>()
+                          .isCountryFavorite(country.cca2);
                       return CountryListTile(
                         country: country,
                         isFavorite: isFav,
                         onToggleFavorite: () {
-                          context.read<FavoritesCubit>().onToggleFavorite(country);
+                          context.read<FavoritesCubit>().onToggleFavorite(
+                            country,
+                          );
                         },
                         onTap: () {
                           showModalBottomSheet(
@@ -151,7 +165,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             backgroundColor: Colors.transparent,
                             builder: (_) {
                               return BlocProvider(
-                                create: (_) => di.sl<DetailCubit>()..loadCountryDetail(country.cca2),
+                                create: (_) =>
+                                    di.sl<DetailCubit>()
+                                      ..loadCountryDetail(country.cca2),
                                 child: DraggableScrollableSheet(
                                   initialChildSize: 0.9,
                                   minChildSize: 0.5,

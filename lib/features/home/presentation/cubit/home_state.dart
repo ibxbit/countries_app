@@ -3,7 +3,7 @@ import 'package:countries_app/features/home/domain/entities/country_summary.dart
 
 abstract class HomeState extends Equatable {
   const HomeState();
-  
+
   @override
   List<Object?> get props => [];
 }

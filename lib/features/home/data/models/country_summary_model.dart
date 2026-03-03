@@ -23,7 +23,8 @@ class CountrySummaryModel with _$CountrySummaryModel {
 
   CountrySummary toEntity() {
     return CountrySummary(
-      commonName: (name != null ? (name!['common'] as String?) : null) ?? 'Unknown',
+      commonName:
+          (name != null ? (name!['common'] as String?) : null) ?? 'Unknown',
       flagPng: (flags != null ? (flags!['png'] as String?) : null) ?? '',
       flagSvg: (flags != null ? (flags!['svg'] as String?) : null) ?? '',
       population: population ?? 0,

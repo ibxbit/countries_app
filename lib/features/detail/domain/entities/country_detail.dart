@@ -39,15 +39,15 @@ class CountryDetail extends Equatable {
 
   @override
   List<Object?> get props => [
-        cca2,
-        commonName,
-        flagPng,
-        flagSvg,
-        population,
-        capital,
-        region,
-        subregion,
-        area,
-        timezones,
-      ];
+    cca2,
+    commonName,
+    flagPng,
+    flagSvg,
+    population,
+    capital,
+    region,
+    subregion,
+    area,
+    timezones,
+  ];
 }

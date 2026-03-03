@@ -3,7 +3,7 @@ import 'package:countries_app/features/home/domain/entities/country_summary.dart
 
 abstract class FavoritesState extends Equatable {
   const FavoritesState();
-  
+
   @override
   List<Object?> get props => [];
 }

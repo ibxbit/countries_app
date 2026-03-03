@@ -27,10 +27,7 @@ Future<void> init() async {
   //! Features - Home
   // Bloc
   sl.registerFactory(
-    () => HomeCubit(
-      getAllCountries: sl(),
-      searchCountries: sl(),
-    ),
+    () => HomeCubit(getAllCountries: sl(), searchCountries: sl()),
   );
 
   // Use cases
@@ -49,9 +46,7 @@ Future<void> init() async {
 
   //! Features - Detail
   // Bloc
-  sl.registerFactory(
-    () => DetailCubit(getCountryDetail: sl()),
-  );
+  sl.registerFactory(() => DetailCubit(getCountryDetail: sl()));
 
   // Use cases
   sl.registerLazySingleton(() => GetCountryDetail(sl()));
@@ -99,7 +94,7 @@ Future<void> init() async {
 
   await Hive.initFlutter();
   Hive.registerAdapter(CountrySummaryModelAdapter());
-  
+
   final favoritesBox = await Hive.openBox<CountrySummaryModel>('favorites');
   sl.registerLazySingleton(() => favoritesBox);
 }

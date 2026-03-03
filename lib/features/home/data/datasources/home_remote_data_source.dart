@@ -13,11 +13,15 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
 
   @override
   Future<List<CountrySummaryModel>> getAllCountries() async {
-    final response = await client.get('/all?fields=name,flags,population,capital,cca2');
-    
+    final response = await client.get(
+      '/all?fields=name,flags,population,capital,cca2',
+    );
+
     if (response.statusCode == 200) {
       final List<dynamic> jsonList = response.data;
-      return jsonList.map((json) => CountrySummaryModel.fromJson(json)).toList();
+      return jsonList
+          .map((json) => CountrySummaryModel.fromJson(json))
+          .toList();
     } else {
       throw Exception('Failed to load countries');
     }
@@ -25,11 +29,15 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
 
   @override
   Future<List<CountrySummaryModel>> searchCountries(String name) async {
-    final response = await client.get('/name/$name?fields=name,flags,population,cca2');
-    
+    final response = await client.get(
+      '/name/$name?fields=name,flags,population,cca2',
+    );
+
     if (response.statusCode == 200) {
       final List<dynamic> jsonList = response.data;
-      return jsonList.map((json) => CountrySummaryModel.fromJson(json)).toList();
+      return jsonList
+          .map((json) => CountrySummaryModel.fromJson(json))
+          .toList();
     } else if (response.statusCode == 404) {
       return [];
     } else {

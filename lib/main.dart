@@ -21,12 +21,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (_) => di.sl<HomeCubit>()..loadCountries(),
-        ),
-        BlocProvider(
-          create: (_) => di.sl<FavoritesCubit>()..loadFavorites(),
-        ),
+        BlocProvider(create: (_) => di.sl<HomeCubit>()..loadCountries()),
+        BlocProvider(create: (_) => di.sl<FavoritesCubit>()..loadFavorites()),
       ],
       child: MaterialApp(
         title: 'Countries App',

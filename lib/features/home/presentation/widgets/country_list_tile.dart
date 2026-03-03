@@ -39,11 +39,8 @@ class CountryListTile extends StatelessWidget {
                   width: 60,
                   height: 40,
                   fit: BoxFit.cover,
-                  placeholder: (context, url) => Container(
-                    color: Colors.grey[300],
-                    width: 60,
-                    height: 40,
-                  ),
+                  placeholder: (context, url) =>
+                      Container(color: Colors.grey[300], width: 60, height: 40),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
@@ -56,14 +53,14 @@ class CountryListTile extends StatelessWidget {
                   Text(
                     country.commonName,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Text(
                     subtitle ?? 'Population: $populationStr',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.grey[600],
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(color: Colors.grey[600]),
                   ),
                 ],
               ),

@@ -3,7 +3,7 @@ import '../../domain/entities/country_detail.dart';
 
 abstract class DetailState extends Equatable {
   const DetailState();
-  
+
   @override
   List<Object?> get props => [];
 }

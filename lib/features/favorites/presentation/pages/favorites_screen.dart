@@ -13,9 +13,7 @@ class FavoritesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Favorite Countries'),
-      ),
+      appBar: AppBar(title: const Text('Favorite Countries')),
       body: BlocBuilder<FavoritesCubit, FavoritesState>(
         builder: (context, state) {
           if (state is FavoritesLoading) {
@@ -25,7 +23,9 @@ class FavoritesScreen extends StatelessWidget {
           } else if (state is FavoritesLoaded) {
             final favorites = state.favorites;
             if (favorites.isEmpty) {
-              return const Center(child: Text('No countries have been favorited.'));
+              return const Center(
+                child: Text('No countries have been favorited.'),
+              );
             }
             return ListView.builder(
               itemCount: favorites.length,
@@ -45,7 +45,9 @@ class FavoritesScreen extends StatelessWidget {
                       backgroundColor: Colors.transparent,
                       builder: (_) {
                         return BlocProvider(
-                          create: (_) => di.sl<DetailCubit>()..loadCountryDetail(country.cca2),
+                          create: (_) =>
+                              di.sl<DetailCubit>()
+                                ..loadCountryDetail(country.cca2),
                           child: DraggableScrollableSheet(
                             initialChildSize: 0.9,
                             minChildSize: 0.5,
