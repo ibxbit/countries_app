@@ -1,0 +1,41 @@
+﻿00:00 +0: loading C:/Users/user/Documents/COMEBACK_2025/Projects/countries_app/test/widget_test.dart
+00:00 +0 -1: loading C:/Users/user/Documents/COMEBACK_2025/Projects/countries_app/test/widget_test.dart [E]
+  Failed to load "C:/Users/user/Documents/COMEBACK_2025/Projects/countries_app/test/widget_test.dart":
+  Compilation failed for testPath=C:/Users/user/Documents/COMEBACK_2025/Projects/countries_app/test/widget_test.dart: test/widget_test.dart:12:7: Error: The non-abstract class 'StubHomeCubit' is missing implementations for these members:
+   - HomeCubit.getAllCountries
+   - HomeCubit.searchCountries
+  Try to either
+   - provide an implementation,
+   - inherit an implementation from a superclass or mixin,
+   - mark the class as abstract, or
+   - provide a 'noSuchMethod' implementation.
+  class StubHomeCubit extends Cubit<HomeState> implements HomeCubit {
+        ^^^^^^^^^^^^^
+  lib/features/home/presentation/cubit/home_cubit.dart:9:25: Context: 'HomeCubit.getAllCountries' is defined here.
+    final GetAllCountries getAllCountries;
+                          ^^^^^^^^^^^^^^^
+  lib/features/home/presentation/cubit/home_cubit.dart:10:25: Context: 'HomeCubit.searchCountries' is defined here.
+    final SearchCountries searchCountries;
+                          ^^^^^^^^^^^^^^^
+  test/widget_test.dart:20:7: Error: The non-abstract class 'StubFavoritesCubit' is missing implementations for these members:
+   - FavoritesCubit.checkFavoriteStatus
+   - FavoritesCubit.getFavorites
+   - FavoritesCubit.toggleFavorite
+  Try to either
+   - provide an implementation,
+   - inherit an implementation from a superclass or mixin,
+   - mark the class as abstract, or
+   - provide a 'noSuchMethod' implementation.
+  class StubFavoritesCubit extends Cubit<FavoritesState> implements FavoritesCubit {
+        ^^^^^^^^^^^^^^^^^^
+  lib/features/favorites/presentation/cubit/favorites_cubit.dart:10:29: Context: 'FavoritesCubit.checkFavoriteStatus' is defined here.
+    final CheckFavoriteStatus checkFavoriteStatus;
+                              ^^^^^^^^^^^^^^^^^^^
+  lib/features/favorites/presentation/cubit/favorites_cubit.dart:8:22: Context: 'FavoritesCubit.getFavorites' is defined here.
+    final GetFavorites getFavorites;
+                       ^^^^^^^^^^^^
+  lib/features/favorites/presentation/cubit/favorites_cubit.dart:9:24: Context: 'FavoritesCubit.toggleFavorite' is defined here.
+    final ToggleFavorite toggleFavorite;
+                         ^^^^^^^^^^^^^^
+  .
+00:00 +0 -1: Some tests failed.
