@@ -15,14 +15,15 @@ class StubHomeCubit extends Cubit<HomeState> implements HomeCubit {
   Future<void> loadCountries() async {}
   @override
   void onSearchChanged(String query) {}
-  
+
   @override
   get getAllCountries => throw UnimplementedError();
   @override
   get searchCountries => throw UnimplementedError();
 }
 
-class StubFavoritesCubit extends Cubit<FavoritesState> implements FavoritesCubit {
+class StubFavoritesCubit extends Cubit<FavoritesState>
+    implements FavoritesCubit {
   StubFavoritesCubit() : super(FavoritesInitial());
   @override
   Future<void> loadFavorites() async {}
@@ -54,7 +55,7 @@ void main() {
     // Using a simpler MaterialApp for testing to avoid full app initialization if needed,
     // but here we try to pump the actual MyApp to verify it doesn't crash.
     await tester.pumpWidget(const MyApp());
-    
+
     // Verify that the app widget is present
     expect(find.byType(MyApp), findsOneWidget);
   });
