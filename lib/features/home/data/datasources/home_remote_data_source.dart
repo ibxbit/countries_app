@@ -4,6 +4,7 @@ import 'package:countries_app/features/home/data/models/country_summary_model.da
 abstract class HomeRemoteDataSource {
   Future<List<CountrySummaryModel>> getAllCountries();
   Future<List<CountrySummaryModel>> searchCountries(String name);
+  Future<List<Map<String, dynamic>>> getAllCountriesDetailSeed();
 }
 
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
@@ -56,5 +57,21 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
     } else {
       throw Exception('Failed to search countries');
     }
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> getAllCountriesDetailSeed() async {
+    final response = await client.get(
+      '/all?fields=cca2,name,flags,population,capital,region,subregion,area,timezones',
+    );
+
+    if (_isSuccessful(response.statusCode)) {
+      final List<dynamic> jsonList = response.data;
+      return jsonList
+          .map((json) => Map<String, dynamic>.from(json as Map))
+          .toList();
+    }
+
+    return [];
   }
 }

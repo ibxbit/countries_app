@@ -8,6 +8,7 @@ A premium, high-performance Flutter application for exploring world countries, b
 - **Detailed Insights**: View in-depth statistics including population, area, timezones, and regional data.
 - **Figma-Aligned UI**: Premium, state-of-the-art design following modern UX standards.
 - **Persistent Favorites**: Save your favorite countries for quick access, powered by Hive local storage.
+- **Offline Support**: Access cached country list and details when network is unavailable.
 - **High-Performance Navigation**: Smooth transitions and Hero animations for a seamless experience.
 
 ## Technical Stack
@@ -16,7 +17,16 @@ A premium, high-performance Flutter application for exploring world countries, b
 - **Architecture**: Flutter Clean Architecture (Domain, Data, Presentation)
 - **State Management**: BLoC / Cubit
 - **Local Storage**: Hive (for favorites)
+- **Caching**: Dio cache interceptor + Hive-backed repository cache + image cache manager
 - **UI Components**: CachedNetworkImage, Google Fonts (JetBrains Mono)
+
+## Offline Mode
+
+- The app caches the Home country list for offline browsing.
+- Country details are cached per-country after first open.
+- A background detail-seed cache is stored from online sessions so key fields like capital, region, and subregion are available offline for most countries.
+- Flags are prefetched/cached to improve offline image visibility.
+- If a country has never been cached and no seed exists, fallback values may still show as `N/A`.
 
 ## Architecture & Technology Choices
 

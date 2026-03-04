@@ -36,7 +36,10 @@ Future<void> init() async {
 
   // Repository
   sl.registerLazySingleton<HomeRepository>(
-    () => HomeRepositoryImpl(remoteDataSource: sl()),
+    () => HomeRepositoryImpl(
+      remoteDataSource: sl(),
+      cacheBox: sl(instanceName: 'countries_cache_box'),
+    ),
   );
 
   // Data sources
@@ -53,7 +56,11 @@ Future<void> init() async {
 
   // Repository
   sl.registerLazySingleton<DetailRepository>(
-    () => DetailRepositoryImpl(remoteDataSource: sl()),
+    () => DetailRepositoryImpl(
+      remoteDataSource: sl(),
+      cacheBox: sl(instanceName: 'country_detail_cache_box'),
+      countriesCacheBox: sl(instanceName: 'countries_cache_box'),
+    ),
   );
 
   // Data sources
@@ -103,4 +110,18 @@ Future<void> init() async {
 
   final favoritesBox = await Hive.openBox<CountrySummaryModel>('favorites');
   sl.registerLazySingleton(() => favoritesBox);
+
+  final countriesCacheBox = await Hive.openBox<String>('countries_cache_box');
+  sl.registerLazySingleton<Box<String>>(
+    () => countriesCacheBox,
+    instanceName: 'countries_cache_box',
+  );
+
+  final countryDetailCacheBox = await Hive.openBox<String>(
+    'country_detail_cache_box',
+  );
+  sl.registerLazySingleton<Box<String>>(
+    () => countryDetailCacheBox,
+    instanceName: 'country_detail_cache_box',
+  );
 }

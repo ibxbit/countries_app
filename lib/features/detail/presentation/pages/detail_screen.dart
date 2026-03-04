@@ -159,7 +159,7 @@ class DetailScreen extends StatelessWidget {
       height: 220,
       decoration: BoxDecoration(
         color: colorScheme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(8),
       ),
       child: Center(
         child: Hero(
@@ -167,7 +167,7 @@ class DetailScreen extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(2),
               child: CachedNetworkImage(
                 imageUrl: flagUrl,
                 width: double.infinity,
