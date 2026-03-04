@@ -71,7 +71,9 @@ class _HomeScreenState extends State<HomeScreen> {
             builder: (context, themeMode, _) {
               final isDark = Theme.of(context).brightness == Brightness.dark;
               return IconButton(
-                tooltip: isDark ? 'Switch to light mode' : 'Switch to dark mode',
+                tooltip: isDark
+                    ? 'Switch to light mode'
+                    : 'Switch to dark mode',
                 icon: Icon(isDark ? Icons.light_mode : Icons.dark_mode),
                 onPressed: toggleThemeMode,
               );
@@ -155,89 +157,96 @@ class _HomeScreenState extends State<HomeScreen> {
           constraints: const BoxConstraints(maxWidth: 800),
           child: BlocBuilder<HomeCubit, HomeState>(
             builder: (context, homeState) {
-          if (homeState is HomeLoading) {
-            return const CountryListShimmer();
-          } else if (homeState is HomeError) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(homeState.message, style: GoogleFonts.jetBrainsMono()),
-                  const SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: () => context.read<HomeCubit>().loadCountries(),
-                    child: Text('Retry', style: GoogleFonts.jetBrainsMono()),
+              if (homeState is HomeLoading) {
+                return const CountryListShimmer();
+              } else if (homeState is HomeError) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        homeState.message,
+                        style: GoogleFonts.jetBrainsMono(),
+                      ),
+                      const SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed: () =>
+                            context.read<HomeCubit>().loadCountries(),
+                        child: Text(
+                          'Retry',
+                          style: GoogleFonts.jetBrainsMono(),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            );
-          } else if (homeState is HomeLoaded) {
-            final countries = homeState.filteredCountries;
-            if (countries.isEmpty) {
-              return Center(
-                child: Text(
-                  'No countries found.',
-                  style: GoogleFonts.jetBrainsMono(),
-                ),
-              );
-            }
-            return RefreshIndicator(
-              onRefresh: () => context.read<HomeCubit>().loadCountries(),
-              child: BlocBuilder<FavoritesCubit, FavoritesState>(
-                builder: (context, favState) {
-                  return ListView.builder(
-                    controller: _scrollController,
-                    itemCount: countries.length,
-                    itemBuilder: (context, index) {
-                      final country = countries[index];
-                      final isFav = context
-                          .read<FavoritesCubit>()
-                          .isCountryFavorite(country.cca2);
-                      return CountryListTile(
-                        country: country,
-                        isFavorite: isFav,
-                        onToggleFavorite: () {
-                          context.read<FavoritesCubit>().onToggleFavorite(
-                            country,
-                          );
-                        },
-                        onTap: () {
-                          showModalBottomSheet(
-                            context: context,
-                            isScrollControlled: true,
-                            backgroundColor: Colors.transparent,
-                            builder: (_) {
-                              return BlocProvider(
-                                create: (_) =>
-                                    di.sl<DetailCubit>()
-                                      ..loadCountryDetail(country.cca2),
-                                child: DraggableScrollableSheet(
-                                  initialChildSize: 0.9,
-                                  minChildSize: 0.5,
-                                  maxChildSize: 0.95,
-                                  builder: (_, scrollController) {
-                                    return DetailScreen(
-                                      cca2: country.cca2,
-                                      scrollController: scrollController,
-                                    );
-                                  },
-                                ),
+                );
+              } else if (homeState is HomeLoaded) {
+                final countries = homeState.filteredCountries;
+                if (countries.isEmpty) {
+                  return Center(
+                    child: Text(
+                      'No countries found.',
+                      style: GoogleFonts.jetBrainsMono(),
+                    ),
+                  );
+                }
+                return RefreshIndicator(
+                  onRefresh: () => context.read<HomeCubit>().loadCountries(),
+                  child: BlocBuilder<FavoritesCubit, FavoritesState>(
+                    builder: (context, favState) {
+                      return ListView.builder(
+                        controller: _scrollController,
+                        itemCount: countries.length,
+                        itemBuilder: (context, index) {
+                          final country = countries[index];
+                          final isFav = context
+                              .read<FavoritesCubit>()
+                              .isCountryFavorite(country.cca2);
+                          return CountryListTile(
+                            country: country,
+                            isFavorite: isFav,
+                            onToggleFavorite: () {
+                              context.read<FavoritesCubit>().onToggleFavorite(
+                                country,
+                              );
+                            },
+                            onTap: () {
+                              showModalBottomSheet(
+                                context: context,
+                                isScrollControlled: true,
+                                backgroundColor: Colors.transparent,
+                                builder: (_) {
+                                  return BlocProvider(
+                                    create: (_) =>
+                                        di.sl<DetailCubit>()
+                                          ..loadCountryDetail(country.cca2),
+                                    child: DraggableScrollableSheet(
+                                      initialChildSize: 0.9,
+                                      minChildSize: 0.5,
+                                      maxChildSize: 0.95,
+                                      builder: (_, scrollController) {
+                                        return DetailScreen(
+                                          cca2: country.cca2,
+                                          scrollController: scrollController,
+                                        );
+                                      },
+                                    ),
+                                  );
+                                },
                               );
                             },
                           );
                         },
                       );
                     },
-                  );
-                },
-              ),
-            );
-          }
-          return const SizedBox.shrink();
-        },
+                  ),
+                );
+              }
+              return const SizedBox.shrink();
+            },
+          ),
+        ),
       ),
-    ),
-    ),
     );
   }
 }

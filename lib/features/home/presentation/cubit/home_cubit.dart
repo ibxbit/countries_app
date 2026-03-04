@@ -106,21 +106,27 @@ class HomeCubit extends Cubit<HomeState> {
     }
 
     final latestState = state as HomeLoaded;
-    result.fold((failure) {
-      emit(
-        latestState.copyWith(
-          filteredCountries: _sortCountries(localFiltered, latestState.sortBy),
-          searchQuery: normalizedQuery,
-        ),
-      );
-    }, (countries) {
-      emit(
-        latestState.copyWith(
-          filteredCountries: _sortCountries(countries, latestState.sortBy),
-          searchQuery: normalizedQuery,
-        ),
-      );
-    });
+    result.fold(
+      (failure) {
+        emit(
+          latestState.copyWith(
+            filteredCountries: _sortCountries(
+              localFiltered,
+              latestState.sortBy,
+            ),
+            searchQuery: normalizedQuery,
+          ),
+        );
+      },
+      (countries) {
+        emit(
+          latestState.copyWith(
+            filteredCountries: _sortCountries(countries, latestState.sortBy),
+            searchQuery: normalizedQuery,
+          ),
+        );
+      },
+    );
   }
 
   @override

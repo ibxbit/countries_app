@@ -65,7 +65,9 @@ class DetailScreen extends StatelessWidget {
                     return IconButton(
                       icon: Icon(
                         isFav ? Icons.favorite : Icons.favorite_border,
-                        color: isFav ? Colors.red : colorScheme.onSurfaceVariant,
+                        color: isFav
+                            ? Colors.red
+                            : colorScheme.onSurfaceVariant,
                       ),
                       onPressed: () => context
                           .read<FavoritesCubit>()
@@ -188,8 +190,16 @@ class DetailScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildStatRow(context, 'Capital', country.capital),
-        _buildStatRow(context, 'Area', '${formatter.format(country.area)} sq km'),
-        _buildStatRow(context, 'Population', formatter.format(country.population)),
+        _buildStatRow(
+          context,
+          'Area',
+          '${formatter.format(country.area)} sq km',
+        ),
+        _buildStatRow(
+          context,
+          'Population',
+          formatter.format(country.population),
+        ),
         _buildStatRow(context, 'Region', country.region),
         _buildStatRow(context, 'Sub Region', country.subregion),
       ],

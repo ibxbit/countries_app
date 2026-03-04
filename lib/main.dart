@@ -56,7 +56,8 @@ class MyApp extends StatelessWidget {
                 final cca2 = settings.arguments as String;
                 return MaterialPageRoute(
                   builder: (_) => BlocProvider(
-                    create: (_) => di.sl<DetailCubit>()..loadCountryDetail(cca2),
+                    create: (_) =>
+                        di.sl<DetailCubit>()..loadCountryDetail(cca2),
                     child: DetailScreen(cca2: cca2),
                   ),
                 );
