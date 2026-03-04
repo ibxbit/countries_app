@@ -14,6 +14,8 @@ class StubHomeCubit extends Cubit<HomeState> implements HomeCubit {
   Future<void> loadCountries() async {}
   @override
   void onSearchChanged(String query) {}
+  @override
+  void onSortChanged(SortBy sortBy) {}
 
   @override
   get getAllCountries => throw UnimplementedError();

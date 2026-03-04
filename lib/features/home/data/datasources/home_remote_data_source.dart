@@ -11,16 +11,27 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
 
   HomeRemoteDataSourceImpl({required this.client});
 
+  Map<String, dynamic> _normalizeCountryJson(dynamic json) {
+    final map = Map<String, dynamic>.from(json as Map);
+    map.putIfAbsent('capital', () => null);
+    return map;
+  }
+
+  bool _isSuccessful(int? statusCode) {
+    if (statusCode == null) return false;
+    return (statusCode >= 200 && statusCode < 300) || statusCode == 304;
+  }
+
   @override
   Future<List<CountrySummaryModel>> getAllCountries() async {
     final response = await client.get(
-      '/all?fields=name,flags,population,capital,cca2',
+      '/all?fields=name,flags,population,cca2',
     );
 
-    if (response.statusCode == 200) {
+    if (_isSuccessful(response.statusCode)) {
       final List<dynamic> jsonList = response.data;
       return jsonList
-          .map((json) => CountrySummaryModel.fromJson(json))
+          .map((json) => CountrySummaryModel.fromJson(_normalizeCountryJson(json)))
           .toList();
     } else {
       throw Exception('Failed to load countries');
@@ -33,10 +44,10 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
       '/name/$name?fields=name,flags,population,cca2',
     );
 
-    if (response.statusCode == 200) {
+    if (_isSuccessful(response.statusCode)) {
       final List<dynamic> jsonList = response.data;
       return jsonList
-          .map((json) => CountrySummaryModel.fromJson(json))
+          .map((json) => CountrySummaryModel.fromJson(_normalizeCountryJson(json)))
           .toList();
     } else if (response.statusCode == 404) {
       return [];

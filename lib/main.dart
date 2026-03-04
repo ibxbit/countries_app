@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'di/injection_container.dart' as di;
 import 'core/presentation/pages/main_screen.dart';
+import 'core/presentation/theme_mode_controller.dart';
 import 'features/home/presentation/cubit/home_cubit.dart';
 import 'features/favorites/presentation/cubit/favorites_cubit.dart';
 import 'features/detail/presentation/pages/detail_screen.dart';
@@ -24,39 +25,45 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => di.sl<HomeCubit>()..loadCountries()),
         BlocProvider(create: (_) => di.sl<FavoritesCubit>()..loadFavorites()),
       ],
-      child: MaterialApp(
-        title: 'Countries App',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.deepPurple,
-            brightness: Brightness.light,
-          ),
-          textTheme: GoogleFonts.jetBrainsMonoTextTheme(),
-        ),
-        darkTheme: ThemeData(
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.deepPurple,
-            brightness: Brightness.dark,
-          ),
-          textTheme: GoogleFonts.jetBrainsMonoTextTheme(
-            ThemeData.dark().textTheme,
-          ),
-        ),
-        home: const MainScreen(),
-        onGenerateRoute: (settings) {
-          if (settings.name == '/detail') {
-            final cca2 = settings.arguments as String;
-            return MaterialPageRoute(
-              builder: (_) => BlocProvider(
-                create: (_) => di.sl<DetailCubit>()..loadCountryDetail(cca2),
-                child: DetailScreen(cca2: cca2),
+      child: ValueListenableBuilder<ThemeMode>(
+        valueListenable: themeModeNotifier,
+        builder: (context, themeMode, _) {
+          return MaterialApp(
+            title: 'Countries App',
+            debugShowCheckedModeBanner: false,
+            themeMode: themeMode,
+            theme: ThemeData(
+              useMaterial3: true,
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: Colors.deepPurple,
+                brightness: Brightness.light,
               ),
-            );
-          }
-          return null;
+              textTheme: GoogleFonts.jetBrainsMonoTextTheme(),
+            ),
+            darkTheme: ThemeData(
+              useMaterial3: true,
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: Colors.deepPurple,
+                brightness: Brightness.dark,
+              ),
+              textTheme: GoogleFonts.jetBrainsMonoTextTheme(
+                ThemeData.dark().textTheme,
+              ),
+            ),
+            home: const MainScreen(),
+            onGenerateRoute: (settings) {
+              if (settings.name == '/detail') {
+                final cca2 = settings.arguments as String;
+                return MaterialPageRoute(
+                  builder: (_) => BlocProvider(
+                    create: (_) => di.sl<DetailCubit>()..loadCountryDetail(cca2),
+                    child: DetailScreen(cca2: cca2),
+                  ),
+                );
+              }
+              return null;
+            },
+          );
         },
       ),
     );

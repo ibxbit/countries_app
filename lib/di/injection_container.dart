@@ -78,7 +78,10 @@ Future<void> init() async {
 
   // Repository
   sl.registerLazySingleton<FavoritesRepository>(
-    () => FavoritesRepositoryImpl(localDataSource: sl()),
+    () => FavoritesRepositoryImpl(
+      localDataSource: sl(),
+      detailRemoteDataSource: sl(),
+    ),
   );
 
   // Data sources
@@ -86,11 +89,14 @@ Future<void> init() async {
     () => FavoritesLocalDataSourceImpl(favoritesBox: sl()),
   );
 
-  //! Core
-  sl.registerLazySingleton(() => DioClient(sl()));
-
   //! External
-  sl.registerLazySingleton(() => Dio());
+  final dio = Dio();
+  sl.registerLazySingleton<Dio>(() => dio);
+
+  //! Core
+  final dioClient = DioClient(dio);
+  await dioClient.init();
+  sl.registerLazySingleton<DioClient>(() => dioClient);
 
   await Hive.initFlutter();
   Hive.registerAdapter(CountrySummaryModelAdapter());

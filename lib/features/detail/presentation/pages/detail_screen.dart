@@ -16,9 +16,10 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
+      decoration: BoxDecoration(
+        color: colorScheme.surface,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(32),
           topRight: Radius.circular(32),
@@ -35,13 +36,13 @@ class DetailScreen extends StatelessWidget {
           return Scaffold(
             backgroundColor: Colors.transparent,
             appBar: AppBar(
-              backgroundColor: Colors.white,
+              backgroundColor: colorScheme.surface,
               elevation: 0,
               centerTitle: true,
               leading: IconButton(
-                icon: const Icon(
+                icon: Icon(
                   Icons.arrow_back_ios_new,
-                  color: Colors.black,
+                  color: colorScheme.onSurface,
                   size: 20,
                 ),
                 onPressed: () => Navigator.pop(context),
@@ -49,7 +50,7 @@ class DetailScreen extends StatelessWidget {
               title: Text(
                 title,
                 style: GoogleFonts.jetBrainsMono(
-                  color: Colors.black,
+                  color: colorScheme.onSurface,
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
@@ -64,7 +65,7 @@ class DetailScreen extends StatelessWidget {
                     return IconButton(
                       icon: Icon(
                         isFav ? Icons.favorite : Icons.favorite_border,
-                        color: isFav ? Colors.red : Colors.black,
+                        color: isFav ? Colors.red : colorScheme.onSurfaceVariant,
                       ),
                       onPressed: () => context
                           .read<FavoritesCubit>()
@@ -82,13 +83,21 @@ class DetailScreen extends StatelessWidget {
                   width: 40,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: Colors.grey.withValues(alpha: 0.2),
+                    color: colorScheme.onSurfaceVariant.withValues(alpha: 0.25),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
                 const SizedBox(height: 8),
 
-                Expanded(child: _buildBody(context, state)),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 600),
+                      child: _buildBody(context, state),
+                    ),
+                  ),
+                ),
               ],
             ),
           );
@@ -112,7 +121,7 @@ class DetailScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildFlagSection(country.flagPng, country.commonName),
+                _buildFlagSection(context, country.flagPng, country.commonName),
                 const SizedBox(height: 24),
 
                 Text(
@@ -141,12 +150,13 @@ class DetailScreen extends StatelessWidget {
     return const SizedBox.shrink();
   }
 
-  Widget _buildFlagSection(String flagUrl, String name) {
+  Widget _buildFlagSection(BuildContext context, String flagUrl, String name) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       width: double.infinity,
       height: 220,
       decoration: BoxDecoration(
-        color: const Color(0xFFF5F6F8),
+        color: colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(24),
       ),
       child: Center(
@@ -177,16 +187,17 @@ class DetailScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildStatRow('Capital', country.capital),
-        _buildStatRow('Area', '${formatter.format(country.area)} sq km'),
-        _buildStatRow('Population', formatter.format(country.population)),
-        _buildStatRow('Region', country.region),
-        _buildStatRow('Sub Region', country.subregion),
+        _buildStatRow(context, 'Capital', country.capital),
+        _buildStatRow(context, 'Area', '${formatter.format(country.area)} sq km'),
+        _buildStatRow(context, 'Population', formatter.format(country.population)),
+        _buildStatRow(context, 'Region', country.region),
+        _buildStatRow(context, 'Sub Region', country.subregion),
       ],
     );
   }
 
-  Widget _buildStatRow(String label, String value) {
+  Widget _buildStatRow(BuildContext context, String label, String value) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
@@ -195,7 +206,7 @@ class DetailScreen extends StatelessWidget {
           Text(
             label,
             style: GoogleFonts.jetBrainsMono(
-              color: Colors.grey[600],
+              color: colorScheme.onSurfaceVariant,
               fontSize: 14,
               fontWeight: FontWeight.w500,
             ),
@@ -203,7 +214,7 @@ class DetailScreen extends StatelessWidget {
           Text(
             value,
             style: GoogleFonts.jetBrainsMono(
-              color: Colors.black87,
+              color: colorScheme.onSurface,
               fontSize: 14,
               fontWeight: FontWeight.bold,
             ),
@@ -214,6 +225,7 @@ class DetailScreen extends StatelessWidget {
   }
 
   Widget _buildTimezoneSection(BuildContext context, dynamic country) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -232,20 +244,23 @@ class DetailScreen extends StatelessWidget {
             return Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: colorScheme.surfaceContainer,
                 borderRadius: BorderRadius.circular(8),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.05),
+                    color: colorScheme.shadow.withValues(alpha: 0.2),
                     blurRadius: 4,
                     offset: const Offset(0, 2),
                   ),
                 ],
-                border: Border.all(color: Colors.grey.withValues(alpha: 0.2)),
+                border: Border.all(
+                  color: colorScheme.outlineVariant.withValues(alpha: 0.7),
+                ),
               ),
               child: Text(
                 tz,
                 style: GoogleFonts.jetBrainsMono(
+                  color: colorScheme.onSurface,
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
                 ),

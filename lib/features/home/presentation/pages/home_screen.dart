@@ -10,6 +10,7 @@ import 'package:countries_app/features/favorites/presentation/cubit/favorites_st
 import 'package:countries_app/di/injection_container.dart' as di;
 import 'package:countries_app/features/detail/presentation/pages/detail_screen.dart';
 import 'package:countries_app/features/detail/presentation/cubit/detail_cubit.dart';
+import 'package:countries_app/core/presentation/theme_mode_controller.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -64,6 +65,45 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: _isScrolled ? 2 : 0,
         backgroundColor: appBarColor,
         surfaceTintColor: appBarColor,
+        actions: [
+          ValueListenableBuilder<ThemeMode>(
+            valueListenable: themeModeNotifier,
+            builder: (context, themeMode, _) {
+              final isDark = Theme.of(context).brightness == Brightness.dark;
+              return IconButton(
+                tooltip: isDark ? 'Switch to light mode' : 'Switch to dark mode',
+                icon: Icon(isDark ? Icons.light_mode : Icons.dark_mode),
+                onPressed: toggleThemeMode,
+              );
+            },
+          ),
+          BlocBuilder<HomeCubit, HomeState>(
+            builder: (context, state) {
+              final SortBy currentSort = (state is HomeLoaded)
+                  ? state.sortBy
+                  : SortBy.name;
+              return PopupMenuButton<SortBy>(
+                icon: const Icon(Icons.sort),
+                tooltip: 'Sort countries',
+                initialValue: currentSort,
+                onSelected: (SortBy value) {
+                  context.read<HomeCubit>().onSortChanged(value);
+                },
+                itemBuilder: (BuildContext context) => <PopupMenuEntry<SortBy>>[
+                  const PopupMenuItem<SortBy>(
+                    value: SortBy.name,
+                    child: Text('Sort by Name (A-Z)'),
+                  ),
+                  const PopupMenuItem<SortBy>(
+                    value: SortBy.population,
+                    child: Text('Sort by Population (High to Low)'),
+                  ),
+                ],
+              );
+            },
+          ),
+          const SizedBox(width: 8),
+        ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: Padding(
@@ -110,8 +150,11 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: BlocBuilder<HomeCubit, HomeState>(
-        builder: (context, homeState) {
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 800),
+          child: BlocBuilder<HomeCubit, HomeState>(
+            builder: (context, homeState) {
           if (homeState is HomeLoading) {
             return const CountryListShimmer();
           } else if (homeState is HomeError) {
@@ -193,6 +236,8 @@ class _HomeScreenState extends State<HomeScreen> {
           return const SizedBox.shrink();
         },
       ),
+    ),
+    ),
     );
   }
 }

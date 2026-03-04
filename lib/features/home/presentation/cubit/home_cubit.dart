@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:countries_app/features/home/domain/usecases/get_all_countries.dart';
 import 'package:countries_app/features/home/domain/usecases/search_countries.dart';
 import 'package:countries_app/core/usecases/usecase.dart';
+import 'package:countries_app/features/home/domain/entities/country_summary.dart';
 import 'package:countries_app/features/home/presentation/cubit/home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
@@ -13,15 +14,54 @@ class HomeCubit extends Cubit<HomeState> {
     : super(HomeInitial());
 
   Timer? _debounce;
+  int _searchRequestId = 0;
 
   Future<void> loadCountries() async {
     emit(HomeLoading());
     final result = await getAllCountries(NoParams());
-    result.fold(
-      (failure) => emit(HomeError(failure.message)),
-      (countries) =>
-          emit(HomeLoaded(countries: countries, filteredCountries: countries)),
+    result.fold((failure) => emit(HomeError(failure.message)), (countries) {
+      final sorted = _sortCountries(countries, SortBy.name);
+      emit(HomeLoaded(countries: sorted, filteredCountries: sorted));
+    });
+  }
+
+  void onSortChanged(SortBy sortBy) {
+    if (state is! HomeLoaded) return;
+    final currentState = state as HomeLoaded;
+
+    final sortedFiltered = _sortCountries(
+      currentState.filteredCountries,
+      sortBy,
     );
+    final sortedAll = _sortCountries(currentState.countries, sortBy);
+
+    emit(
+      currentState.copyWith(
+        countries: sortedAll,
+        filteredCountries: sortedFiltered,
+        sortBy: sortBy,
+      ),
+    );
+  }
+
+  List<CountrySummary> _sortCountries(
+    List<CountrySummary> list,
+    SortBy sortBy,
+  ) {
+    final sorted = List<CountrySummary>.from(list);
+    if (sortBy == SortBy.name) {
+      sorted.sort(
+        (CountrySummary a, CountrySummary b) =>
+            a.commonName.compareTo(b.commonName),
+      );
+    } else if (sortBy == SortBy.population) {
+      // Descending population
+      sorted.sort(
+        (CountrySummary a, CountrySummary b) =>
+            b.population.compareTo(a.population),
+      );
+    }
+    return sorted;
   }
 
   void onSearchChanged(String query) {
@@ -34,8 +74,9 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> _search(String query) async {
     if (state is! HomeLoaded) return;
     final currentState = state as HomeLoaded;
+    final normalizedQuery = query.trim();
 
-    if (query.isEmpty) {
+    if (normalizedQuery.isEmpty) {
       emit(
         currentState.copyWith(
           filteredCountries: currentState.countries,
@@ -45,22 +86,41 @@ class HomeCubit extends Cubit<HomeState> {
       return;
     }
 
-    // Offline search first for better UX
+    // Local search first for immediate UI feedback.
     final localFiltered = currentState.countries.where((c) {
-      return c.commonName.toLowerCase().contains(query.toLowerCase());
+      return c.commonName.toLowerCase().contains(normalizedQuery.toLowerCase());
     }).toList();
 
     emit(
       currentState.copyWith(
-        filteredCountries: localFiltered,
-        searchQuery: query,
+        filteredCountries: _sortCountries(localFiltered, currentState.sortBy),
+        searchQuery: normalizedQuery,
       ),
     );
 
-    // Optional: Call API if local search results are sparse or if you want fresh data
-    // For this task, local filtering of the "All" list is usually enough for "real-time" search.
-    // However, the user story says "search for a country by name", and Step 1 API has a search endpoint.
-    // I'll stick to local filtering if we already have the full list, but I could call the API too.
+    final requestId = ++_searchRequestId;
+    final result = await searchCountries(normalizedQuery);
+
+    if (requestId != _searchRequestId || state is! HomeLoaded) {
+      return;
+    }
+
+    final latestState = state as HomeLoaded;
+    result.fold((failure) {
+      emit(
+        latestState.copyWith(
+          filteredCountries: _sortCountries(localFiltered, latestState.sortBy),
+          searchQuery: normalizedQuery,
+        ),
+      );
+    }, (countries) {
+      emit(
+        latestState.copyWith(
+          filteredCountries: _sortCountries(countries, latestState.sortBy),
+          searchQuery: normalizedQuery,
+        ),
+      );
+    });
   }
 
   @override
