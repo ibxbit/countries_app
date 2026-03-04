@@ -35,7 +35,9 @@ class CountryDetailSeedModel {
       flagPng: (flags['png'] as String?) ?? '',
       flagSvg: (flags['svg'] as String?) ?? '',
       population: (json['population'] as int?) ?? 0,
-      capital: capitals.isNotEmpty ? (capitals.first as String? ?? 'N/A') : 'N/A',
+      capital: capitals.isNotEmpty
+          ? (capitals.first as String? ?? 'N/A')
+          : 'N/A',
       region: (json['region'] as String?) ?? 'N/A',
       subregion: (json['subregion'] as String?) ?? 'N/A',
       area: (json['area'] as num?)?.toDouble() ?? 0,
@@ -46,13 +48,8 @@ class CountryDetailSeedModel {
   Map<String, dynamic> toJson() {
     return {
       'cca2': cca2,
-      'name': {
-        'common': commonName,
-      },
-      'flags': {
-        'png': flagPng,
-        'svg': flagSvg,
-      },
+      'name': {'common': commonName},
+      'flags': {'png': flagPng, 'svg': flagSvg},
       'population': population,
       'capital': [capital],
       'region': region,

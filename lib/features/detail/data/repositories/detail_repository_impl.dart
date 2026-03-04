@@ -15,7 +15,8 @@ class DetailRepositoryImpl implements DetailRepository {
   final Box<String> countriesCacheBox;
 
   static const String _allCountriesCacheKey = 'all_countries';
-  static const String _allCountriesDetailSeedCacheKey = 'all_countries_detail_seed';
+  static const String _allCountriesDetailSeedCacheKey =
+      'all_countries_detail_seed';
 
   DetailRepositoryImpl({
     required this.remoteDataSource,
@@ -69,7 +70,9 @@ class DetailRepositoryImpl implements DetailRepository {
       flagPng: (flags['png'] as String?) ?? '',
       flagSvg: (flags['svg'] as String?) ?? '',
       population: (map['population'] as int?) ?? 0,
-      capital: capitals.isNotEmpty ? (capitals.first as String? ?? 'N/A') : 'N/A',
+      capital: capitals.isNotEmpty
+          ? (capitals.first as String? ?? 'N/A')
+          : 'N/A',
       region: 'N/A',
       subregion: 'N/A',
       area: 0,

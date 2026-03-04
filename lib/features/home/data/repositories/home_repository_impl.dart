@@ -15,7 +15,8 @@ class HomeRepositoryImpl implements HomeRepository {
   final Box<String> cacheBox;
 
   static const String _allCountriesCacheKey = 'all_countries';
-  static const String _allCountriesDetailSeedCacheKey = 'all_countries_detail_seed';
+  static const String _allCountriesDetailSeedCacheKey =
+      'all_countries_detail_seed';
 
   HomeRepositoryImpl({required this.remoteDataSource, required this.cacheBox});
 
